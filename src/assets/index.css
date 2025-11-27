@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+img {
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  outline: none;
+  border: none;
+  font-family: "VT323", monospace;
+}
+
+a {
+  text-decoration: none;
+  color: darkcyan;
+}
+
+body {
+  font-family: "VT323", monospace;
+  background-image: url("../../public/background.webp");
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+article {
+  padding: 1rem;
+}
+
+.home, .dashboard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100dvh;
+  flex-direction: column;
+  gap: 1rem;
+}
+.home h1, .dashboard h1 {
+  font-size: 5rem;
+}
+.home .details .sv-ip, .dashboard .details .sv-ip {
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: 200ms ease;
+}
+.home .details .sv-ip:hover, .dashboard .details .sv-ip:hover {
+  text-decoration: underline;
+}
+.home .details .sv-ip:active, .dashboard .details .sv-ip:active {
+  transform: scale(0.5);
+}
+.home .details p, .dashboard .details p {
+  font: 1.25rem;
+}
+
+.btn {
+  padding: 1rem 5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  background-color: rgb(212, 140, 56);
+  color: white;
+  border: 2px solid white;
+  transition: 200ms ease;
+}
+.btn:hover {
+  scale: 1.05;
+  background-color: rgb(163, 107, 42);
+}
+.btn:active {
+  scale: 0.9;
+}
+
+.error {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+}
+.error h1 {
+  font-size: 5rem;
+}
+.error a {
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+.dashboard .details span {
+  font-size: 3rem;
+}
+
+.danger {
+  color: red;
+}
+
+.logs {
+  width: 70%;
+}
+
+.loading {
+  font-size: 1.755rem;
+  color: orange;
+}
+
+.errors {
+  overflow-y: auto;
+  width: 100%;
+  border: 1px solid;
+  height: 200px;
+}
+
+.success {
+  color: rgb(37, 175, 37);
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}/*# sourceMappingURL=index.css.map */
