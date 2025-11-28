@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './layout/landing';
 import Error from './layout/error';
 import Dashboard from './layout/dashboard';
+import Admin from './layout/admin';
 
 export default function App() {
 
@@ -11,6 +12,7 @@ export default function App() {
          <Routes>
             <Route path='/' element={<Home />}></Route>
             <Route path='/dashboard' element={<Dashboard />}></Route>
+            <Route path='/admin' element={<Admin />}></Route>
             <Route path='*' element={<Error />}></Route>
          </Routes>
       </Router>
