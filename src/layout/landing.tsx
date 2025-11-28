@@ -8,6 +8,8 @@ export default function Home() {
          };
          const clipboardItem = new ClipboardItem(clipboardItemData);
          await navigator.clipboard.write([clipboardItem]);
+
+         alert("Server IP copied to clipboard")
       }
 
 
@@ -17,15 +19,15 @@ export default function Home() {
          <h1>Breasla Angajatiilor</h1>
 
          <div className="details">
-            <span className="sv-ip" onClick={() => setClipboard()}>Server IP: vladpoienariu.go.ro</span>
+            <h2 className="sv-ip accent" onClick={() => setClipboard()}>Server IP: vladpoienariu.go.ro</h2>
             <p>( click to copy )</p>
          </div>
       </header>
 
       <div className="download-modpack btns">
-         <a href="../../public/Breasla_Angajatiilor.zip" download><button className="btn primary-btn">Download CurseForge mods</button></a>
-         <a target="_blank" href="https://nextcloud.vladpoienariu.com/index.php/s/BBNdYtWmsLTzBsD">
-            <button className="btn">Get mods RAW</button>
+         <a className="btn" href="../../public/Breasla_Angajatiilor.zip" download>Download CurseForge mods</a>
+         <a target="_blank" className="btn" href="https://nextcloud.vladpoienariu.com/index.php/s/BBNdYtWmsLTzBsD">
+           Get mods RAW
          </a>
       </div>
 

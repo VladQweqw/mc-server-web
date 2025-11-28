@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
-
    const [data, setData] = useState<any>(null)
    const [error, setError] = useState('')
    const [loading, setLoading] = useState(false)
@@ -31,14 +30,12 @@ export default function Dashboard() {
       callApi()
    }, []); // empty dependency = run once on mount
 
-   console.log(data);
-   
    useEffect(() => {
-      if(data) {
+      if (data) {
          setServerOn(data.online)
       }
    }, [data])
-   
+
 
 
    return (
@@ -47,22 +44,28 @@ export default function Dashboard() {
             <h1><a href="/">Breasla Angajatiilor</a></h1>
 
             <div className="details">
-               <span>Status: {serverOn ? <span className="success">Online</span> : <span className="danger">Offline</span>}</span>
+               <h2>
+                  Status: {serverOn ? <span className="success">Online</span> : <span className="danger">Offline</span>}
+               </h2>
             </div>
          </header>
 
          <div>
             <h2>Server details:</h2>
             <div className="details">
-               {loading ? <p className="loading">Loading...</p> : "" }
+               {loading ? <p className="loading">Loading...</p> : ""}
                {data ?
                   <>
-                  <p>{data?.motd.clean}</p>
-                  <p>Players {data?.players.online}/{data?.players.max}</p>
-                  <p>Version {data?.version}</p>
-                  <p>IP {data?.ip}</p>
+                     {data.isOnline ?
+                        <>
+                           <p>{data?.motd.clean}</p>
+                           <p>Players {data?.players.online}/{data?.players.max}</p>
+                           <p>Version {data?.version}</p>
+                        </>
+                        : ""}
+                     <p>IP {data?.ip}</p>
                   </>
-               : ""}
+                  : ""}
             </div>
          </div>
 
@@ -74,8 +77,8 @@ export default function Dashboard() {
          </div>
 
          <div className="btns">
-            <a href="https://nextcloud.vladpoienariu.com/index.php/apps/files/files/90643?dir=/Minecraft/mods" target="_blank">
-                <button className="btn primary-btn">Add mods (pass: suntangajat)</button>
+            <a className="btn" href="https://nextcloud.vladpoienariu.com/index.php/s/X9HnrWsc3zXnD4R" target="_blank">
+               Add mods (pass: suntangajat)
             </a>
             <button className="btn primary-btn">Sync mods</button>
             <button className="btn primary-btn">Start server</button>

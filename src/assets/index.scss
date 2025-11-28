@@ -41,22 +41,34 @@ article {
   padding: 1rem;
 }
 
+h1 {
+  font-size: clamp(3rem, 5vw, 5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h3 {
+  font-size: clamp(1rem, 5vw, 3rem);
+}
+
+p {
+  font-size: clamp(1rem, 5vw, 1.5rem);
+}
+
 .home, .dashboard {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
   height: 100dvh;
   flex-direction: column;
   gap: 1rem;
 
-  h1 {
-    font-size: 5rem;
-  }
 
   .details {
     .sv-ip {
-      font-size: 2.5rem;
       cursor: pointer;
       transition: 200ms ease;
     }
@@ -66,34 +78,43 @@ article {
     }
 
     .sv-ip:active {
-        transform: scale(0.5);
+        transform: scale(0.9);
     }
 
-    p {
-      font: 1.25rem;
-    }
   }
 }
 
 
 .btn {
-    padding: 1rem 5rem;
+    padding: .75rem 1rem;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     background-color: rgb(212, 140, 56);
     color: white;
     border: 2px solid white;
     transition: 200ms ease;
+    width: 100%;
+    max-width: 300px;
 
     &:hover {
         scale: 1.05;
         background-color: rgb(163, 107, 42);
-
     }
 
     &:active {
         scale: .9;
     }
+}
+
+
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .error {
@@ -105,27 +126,12 @@ article {
     flex-direction: column;
     gap: 3rem;
 
-    h1 {
-        font-size: 5rem;
-    }
-
     a {
         font-size: 3rem;
         text-decoration: underline;
     }
 }
 
-p {
-    font-size: 1.5rem;
-}
-
-.dashboard {
-    .details {
-        span {
-            font-size: 3rem;
-        }
-    }
-}
 
 .danger {
     color: red;
@@ -136,8 +142,11 @@ p {
 }
 
 .loading {
-    font-size: 1.755rem;
     color: orange;
+}
+
+.accent {
+  color: orange;
 }
 
 .errors {
@@ -149,11 +158,4 @@ p {
 
 .success {
     color: rgb(37, 175, 37);
-}
-
-
-.btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
 }
