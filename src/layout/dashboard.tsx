@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+
+const ENDPOINT = `https://minecraft.vladpoienariu.com/api`
+
 
 export default function Dashboard() {
    const [data, setData] = useState<any>(null)
    const [error, setError] = useState('')
    const [loading, setLoading] = useState(false)
 
+   const [dataUser, setDataUser] = useState<any>(null)
+   const [errorUser, setErrorUser] = useState('')
+   const [loadingUser, setLoadingUser] = useState(false)
+
    const [serverOn, setServerOn] = useState(false)
 
-   function callApi() {
+   const navigate = useNavigate()
+
+   function getServerStats() {
       fetch(`https://api.mcsrvstat.us/3/vladpoienariu.go.ro`)
          .then((response) => {
             if (!response.ok) {
@@ -25,16 +35,45 @@ export default function Dashboard() {
          });
    }
 
+   function verifyUser() {
+
+      fetch(`${ENDPOINT}/users`)
+         .then((response) => {
+            if (!response.ok) {
+               throw new Error("Network response was not ok");
+            }
+            return response.json();
+         })
+         .then((json) => {
+            dataUser(json);
+            setLoadingUser(false);
+         })
+         .catch((err) => {
+            setErrorUser(err.message);
+            setLoadingUser(false);
+         });
+   }
+
+
    useEffect(() => {
       setLoading(true)
-      callApi()
+      verifyUser()
+      getServerStats()
    }, []); // empty dependency = run once on mount
 
    useEffect(() => {
+      console.log(dataUser);
+      
+      if(dataUser) {
+         if(!dataUser?.user.isValid) {
+            return navigate("/")
+         }
+      }
+      
       if (data) {
          setServerOn(data.online)
       }
-   }, [data])
+   }, [data, dataUser])
 
 
 
