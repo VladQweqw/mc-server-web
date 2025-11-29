@@ -58,6 +58,63 @@ export default function Dashboard() {
          });
    }
 
+   const [stopData, setStopData] = useState<any>(null)
+   const [stopError, setStopError] = useState('')
+   const [stopLoading, setStopLoading] = useState(false)
+
+   function stopServer() {
+      setStopLoading(true)
+
+      fetch(`${ENDPOINT}/server/start`, {
+         method: "GET",
+         headers: {
+            'Authorization': `Bearer BreaslaAngajatiilor123`
+         }
+      })
+         .then((response) => {
+            if (!response.ok) {
+               throw new Error("Network response was not ok");
+            }
+            return response.json();
+         })
+         .then((json) => {
+            setStopData(json);
+            setStopLoading(false);
+         })
+         .catch((err) => {
+            setStopError(err.message);
+            setStopLoading(false);
+         });
+   }
+
+   const [startData, setStartData] = useState<any>(null)
+   const [startError, setStartError] = useState('')
+   const [startLoading, setStartLoading] = useState(false)
+
+   function startServer() {
+      setStartLoading(true)
+
+      fetch(`${ENDPOINT}/server/start`, {
+         method: "GET",
+         headers: {
+            'Authorization': `Bearer BreaslaAngajatiilor123`
+         }
+      })
+         .then((response) => {
+            if (!response.ok) {
+               throw new Error("Network response was not ok");
+            }
+            return response.json();
+         })
+         .then((json) => {
+            setStartData(json);
+            setStartLoading(false);
+         })
+         .catch((err) => {
+            setStartError(err.message);
+            setStartLoading(false);
+         });
+   }
 
    useEffect(() => {
       setLoading(true)
@@ -67,19 +124,30 @@ export default function Dashboard() {
 
    useEffect(() => {
       console.log(dataUser);
+      console.log(startData);
+      console.log(stopData);
       
-      // if(!dataUser) {
-      //   return navigate("/")
-      // }else if(dataUser) {
-      //    if(!dataUser?.user.isValid) {
-      //       return navigate("/")
-      //    }
-      // }
+      if(startData?.status === 'success') {
+         setServerOn(true)
+      }
+
+      if(stopData?.status === 'success') {
+         setServerOn(false)
+      }
+
       
+      if(!dataUser) {
+        return navigate("/")
+      }else if(dataUser) {
+         if(!dataUser?.user.isValid) {
+            return navigate("/")
+         }
+      }
+
       if (data) {
          setServerOn(data.online)
       }
-   }, [data, dataUser])
+   }, [data, dataUser, startData, stopData])
 
 
 
@@ -93,6 +161,12 @@ export default function Dashboard() {
                   Status: {serverOn ? <span className="success">Online</span> : <span className="danger">Offline</span>}
                </h2>
             </div>
+           {data?.user ?
+           <>
+             <p>Username: {data.user.username}</p>
+               <p>Admin: {data.user.isAdmin ? "true": 'false'}</p>
+           </>
+           : ""}
          </header>
 
          <div>
@@ -126,7 +200,13 @@ export default function Dashboard() {
                Add mods (pass: suntangajat)
             </a>
             <button className="btn primary-btn">Sync mods</button>
-            <button className="btn primary-btn">Start server</button>
+
+               {startLoading ? 
+                <button className="btn primary-btn">Loading</button>
+               : 
+               serverOn ? 
+                <button onClick={() => stopServer()} className="btn primary-btn">Stop server</button>
+               :  <button onClick={() => startServer()} className="btn primary-btn">Start server</button>}
          </div>
       </article>
    )

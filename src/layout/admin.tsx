@@ -44,7 +44,7 @@ export default function Admin() {
 
      if(data) {
        if(data?.status === 'success') {
-         // navigate('/dashboard')
+         navigate('/dashboard')
       }
      }
 
