@@ -64,7 +64,7 @@ export default function Home() {
          </header>
 
          <div className="download-modpack btns">
-            <a className="btn" href="../../public/Breasla_Angajatiilor.zip" download>Download CurseForge mods</a>
+            <a className="btn" href="./Breasla_Angajatiilor.zip" download>Download CurseForge mods</a>
             <a target="_blank" className="btn" href="https://nextcloud.vladpoienariu.com/index.php/s/BBNdYtWmsLTzBsD">
                Get mods RAW
             </a>
