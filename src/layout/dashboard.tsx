@@ -131,9 +131,7 @@ export default function Dashboard() {
 
       if(stopData?.status === 'success') {
          setServerOn(false)
-      }
-
-      if(startData?.status === 'success') {
+      }else if(startData?.status === 'success') {
          setServerOn(true)
       }
 
@@ -153,6 +151,8 @@ export default function Dashboard() {
    }, [dataUser])
 
    useEffect(() => {
+      console.log("fetach data");
+      
       getServerStats()
    }, [serverOn])
    
@@ -211,9 +211,10 @@ export default function Dashboard() {
                {startLoading ? 
                 <button className="btn primary-btn">Loading</button>
                : 
-               serverOn ? 
-                <button onClick={() => stopServer()} className="btn primary-btn">Stop server</button>
-               :  <button onClick={() => startServer()} className="btn primary-btn">Start server</button>}
+               <button onClick={() => startServer()} className="btn primary-btn">Start server</button>}
+
+               {stopLoading ? <button className="btn primary-btn">Loading...</button> : 
+               <button onClick={() => stopServer()} className="btn primary-btn">Stop server</button> }
          </div>
       </article>
    )
