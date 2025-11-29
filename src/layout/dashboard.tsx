@@ -53,7 +53,11 @@ export default function Dashboard() {
          .then((json) => {
             console.log(json);
             
-            
+            if(json.status === 'success') {
+               if(json.user.isValid !== 1) {
+                   return navigate("/")
+               }
+            }
             // if(json?.status) {
             //    if(dataUser?.user?.isValid !== 1) {      
             //       return navigate("/")
