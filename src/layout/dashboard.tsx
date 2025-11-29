@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-const ENDPOINT = `https://minecraft.vladpoienariu.com/api`
-
+import { ENDPOINT } from "../utils";
 
 export default function Dashboard() {
    const [data, setData] = useState<any>(null)
@@ -37,7 +36,12 @@ export default function Dashboard() {
 
    function verifyUser() {
 
-      fetch(`${ENDPOINT}/users`)
+      fetch(`${ENDPOINT}/users`, {
+         method: "GET",
+         headers: {
+            'Authorization': `Bearer BreaslaAngajatiilor123`
+         }
+      })
          .then((response) => {
             if (!response.ok) {
                throw new Error("Network response was not ok");
@@ -45,7 +49,7 @@ export default function Dashboard() {
             return response.json();
          })
          .then((json) => {
-            dataUser(json);
+            setDataUser(json);
             setLoadingUser(false);
          })
          .catch((err) => {
@@ -64,7 +68,9 @@ export default function Dashboard() {
    useEffect(() => {
       console.log(dataUser);
       
-      if(dataUser) {
+      if(!dataUser) {
+        return navigate("/")
+      }else if(dataUser) {
          if(!dataUser?.user.isValid) {
             return navigate("/")
          }

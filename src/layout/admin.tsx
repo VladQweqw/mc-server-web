@@ -1,18 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ENDPOINT } from "../utils";
+
+import { useNavigate } from "react-router";
 
 export default function Admin() {
    const [data, setData] = useState<any>(null)
    const [error, setError] = useState('')
    const [loading, setLoading] = useState(false)
 
-   const [serverOn, setServerOn] = useState(false)
+   const form = useRef<HTMLFormElement | null>(null)
+   const navigate = useNavigate()
+   function login() {
+      setLoading(true)
 
-   function callApi() {
-      fetch(`https://api.mcsrvstat.us/3/vladpoienariu.go.ro`)
-         .then((response) => {
-            if (!response.ok) {
-               throw new Error("Network response was not ok");
-            }
+      const fd = new FormData()
+      
+      fd.append('username', form?.current?.username!.value)
+      fd.append('password', form?.current?.pwd!.value)
+
+      fetch(`${ENDPOINT}/admin/login`, {
+         method: "POST",
+         body: fd,
+         headers: {
+            'Authorization': `Bearer BreaslaAngajatiilor123`
+         }
+      })
+         .then(async (response) => {
             return response.json();
          })
          .then((json) => {
@@ -26,12 +39,14 @@ export default function Admin() {
    }
 
    useEffect(() => {
-      setLoading(true)
-      callApi()
-   }, []); // empty dependency = run once on mount
+      console.log(data);
 
-   useEffect(() => {
-      
+     if(data) {
+       if(data?.status === 'success') {
+         navigate('/dashboard')
+      }
+     }
+
    }, [data])
 
    return (
@@ -46,19 +61,21 @@ export default function Admin() {
             </div>
          </header>
 
-         <form action="" className="form">
+         <form ref={form} action="" className="form">
             <div className="input">
-               <input type="text" placeholder="Username" id="username" className="input-field" />
+               <input title="username" id='username' type="text" placeholder="Username" className="input-field" />
             </div>
             <div className="input">
-               <input type="password" placeholder="Password" id="pwd" className="input-field" />
+               <input title='password'  type="password" placeholder="Password" id="pwd" className="input-field" />
             </div>
             <p className="danger"></p>
          </form>
-
+         {data?.status == 'error' ? 
+            <p className="danger">{data?.error}</p>
+         : ""}
 
          <div className="btns">
-            <button className="btn primary-btn">Log in</button>
+            <button onClick={() => {login()}} className="btn primary-btn">Log in</button>
          </div>
       </article>
    )
