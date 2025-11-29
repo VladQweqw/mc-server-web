@@ -138,15 +138,15 @@ export default function Dashboard() {
    useEffect(() => {
       console.log(dataUser);
 
-      if(dataUser?.user?.isValid !== 1) {
-         console.log("here");
-         console.log(dataUser.user);
-         
-         // return navigate("/")
+      if(dataUser) {
+         if(dataUser?.user?.isValid !== 1) {
+            console.log("here");
+            console.log(dataUser.user);
+            
+            // return navigate("/")
+         }
       }
    }, [dataUser])
-   
-
 
    return (
       <article className="dashboard">
