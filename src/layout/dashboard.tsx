@@ -123,19 +123,8 @@ export default function Dashboard() {
    }, []); // empty dependency = run once on mount
 
    useEffect(() => {
-      console.log(dataUser);
       console.log(startData);
       console.log(stopData);
-
-      if(!dataUser?.user?.isValid) {
-         console.log("here");
-         
-         // return navigate("/")
-      }
-      
-      if(startData?.status === 'success') {
-         setServerOn(true)
-      }
 
       if(stopData?.status === 'success') {
          setServerOn(false)
@@ -144,8 +133,19 @@ export default function Dashboard() {
       if (data) {
          setServerOn(data.online)
       }
-   }, [data, dataUser, startData, stopData])
+   }, [data, startData, stopData])
+   
+   useEffect(() => {
+      console.log(dataUser);
 
+      if(dataUser?.user?.isValid !== 1) {
+         console.log("here");
+         console.log(dataUser.user);
+         
+         // return navigate("/")
+      }
+   }, [dataUser])
+   
 
 
    return (
