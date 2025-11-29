@@ -122,11 +122,11 @@ export default function Dashboard() {
 
    useEffect(() => {
       setLoading(true)
+      getServerStats()
       verifyUser()
    }, []); // empty dependency = run once on mount
 
-   useEffect(() => {
-
+   useEffect(() => {   
       if(stopData || startData) {
               console.log(startData);
       console.log(stopData);
@@ -140,7 +140,7 @@ export default function Dashboard() {
       }
 
       if (data) {
-         setServerOn(data.isOnline)
+         setServerOn(data.online)
       }
    }, [data, startData, stopData])
    
@@ -155,6 +155,8 @@ export default function Dashboard() {
    }, [dataUser])
 
    useEffect(() => {
+      console.log(serverOn);
+      
       console.log("fetach data");
       
       getServerStats()
@@ -185,7 +187,7 @@ export default function Dashboard() {
                {loading ? <p className="loading">Loading...</p> : ""}
                {data ?
                   <>
-                     {data.isOnline ?
+                     {data.online ?
                         <>
                            <p>{data?.motd.clean}</p>
                            <p>Players {data?.players.online}/{data?.players.max}</p>
