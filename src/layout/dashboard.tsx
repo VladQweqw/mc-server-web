@@ -139,11 +139,15 @@ export default function Dashboard() {
          }
       }
 
+   }, [startData, stopData])
+
+   useEffect(() => {
       if (data) {
          setServerOn(data.online)
       }
-   }, [data, startData, stopData])
+   }, [data])
    
+
    useEffect(() => {
       console.log(dataUser);
 
@@ -154,11 +158,7 @@ export default function Dashboard() {
       }
    }, [dataUser])
 
-   useEffect(() => {
-      console.log(serverOn);
-      
-      console.log("fetach data");
-      
+   useEffect(() => {            
       getServerStats()
    }, [serverOn])
    
@@ -187,7 +187,7 @@ export default function Dashboard() {
                {loading ? <p className="loading">Loading...</p> : ""}
                {data ?
                   <>
-                     {data.online ?
+                     {data.online && serverOn ?
                         <>
                            <p>{data?.motd.clean}</p>
                            <p>Players {data?.players.online}/{data?.players.max}</p>
