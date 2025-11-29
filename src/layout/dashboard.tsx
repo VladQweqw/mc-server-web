@@ -51,7 +51,15 @@ export default function Dashboard() {
             return response.json();
          })
          .then((json) => {
-            setDataUser(json);
+            console.log(json);
+            
+            
+            if(json?.status) {
+               if(dataUser?.user?.isValid !== 1) {      
+                  return navigate("/")
+               }
+            }
+
             setLoadingUser(false);
          })
          .catch((err) => {
@@ -140,16 +148,6 @@ export default function Dashboard() {
       }
 
    }, [startData, stopData, data])
-
-   useEffect(() => {
-      console.log(dataUser);
-
-      if(dataUser) {
-         if(dataUser?.user?.isValid !== 1) {      
-            return navigate("/")
-         }
-      }
-   }, [dataUser])   
 
    useEffect(() => {
     getServerStats()
