@@ -126,17 +126,21 @@ export default function Dashboard() {
    }, []); // empty dependency = run once on mount
 
    useEffect(() => {
-      console.log(startData);
-      console.log(stopData);
 
-      if(stopData?.status === 'success') {
-         setServerOn(false)
-      }else if(startData?.status === 'success') {
-         setServerOn(true)
+      if(stopData || startData) {
+              console.log(startData);
+      console.log(stopData);
+         if(stopData?.status === 'success') {
+            console.log("awd");
+            
+            setServerOn(false)
+         }else if(startData?.status === 'success') {
+            setServerOn(true)
+         }
       }
 
       if (data) {
-         setServerOn(data.online)
+         setServerOn(data.isOnline)
       }
    }, [data, startData, stopData])
    
