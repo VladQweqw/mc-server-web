@@ -54,11 +54,11 @@ export default function Dashboard() {
             console.log(json);
             
             
-            if(json?.status) {
-               if(dataUser?.user?.isValid !== 1) {      
-                  return navigate("/")
-               }
-            }
+            // if(json?.status) {
+            //    if(dataUser?.user?.isValid !== 1) {      
+            //       return navigate("/")
+            //    }
+            // }
 
             setLoadingUser(false);
          })
