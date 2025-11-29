@@ -14,6 +14,8 @@ export default function Dashboard() {
 
    const [serverOn, setServerOn] = useState(false)
 
+   const [errors, setErrors] = useState("")
+
    const navigate = useNavigate()
 
    function getServerStats() {
@@ -65,8 +67,8 @@ export default function Dashboard() {
    function stopServer() {
       setStopLoading(true)
 
-      fetch(`${ENDPOINT}/server/start`, {
-         method: "GET",
+      fetch(`${ENDPOINT}/server/stop`, {
+         method: "POST",
          headers: {
             'Authorization': `Bearer BreaslaAngajatiilor123`
          }
@@ -83,6 +85,7 @@ export default function Dashboard() {
          })
          .catch((err) => {
             setStopError(err.message);
+            setErrors((a) => a += err.message)
             setStopLoading(false);
          });
    }
@@ -95,7 +98,7 @@ export default function Dashboard() {
       setStartLoading(true)
 
       fetch(`${ENDPOINT}/server/start`, {
-         method: "GET",
+         method: "POST",
          headers: {
             'Authorization': `Bearer BreaslaAngajatiilor123`
          }
@@ -112,6 +115,7 @@ export default function Dashboard() {
          })
          .catch((err) => {
             setStartError(err.message);
+            setErrors((a) => a += err.message)
             setStartLoading(false);
          });
    }
@@ -139,11 +143,8 @@ export default function Dashboard() {
       console.log(dataUser);
 
       if(dataUser) {
-         if(dataUser?.user?.isValid !== 1) {
-            console.log("here");
-            console.log(dataUser.user);
-            
-            // return navigate("/")
+         if(dataUser?.user?.isValid !== 1) {      
+            return navigate("/")
          }
       }
    }, [dataUser])
@@ -158,10 +159,10 @@ export default function Dashboard() {
                   Status: {serverOn ? <span className="success">Online</span> : <span className="danger">Offline</span>}
                </h2>
             </div>
-           {data?.user ?
+           {dataUser?.user ?
            <>
-             <p>Username: {data.user.username}</p>
-               <p>Admin: {data.user.isAdmin ? "true": 'false'}</p>
+             <p>Username: {dataUser.user.username}</p>
+               <p>Admin: {dataUser.user.isAdmin ? "true": 'false'}</p>
            </>
            : ""}
          </header>
@@ -189,6 +190,7 @@ export default function Dashboard() {
             <p>If there are any error will appear below:</p>
             <div className="errors">
                {error ? <p className="danger">Failed to fetch, try again...</p> : ""}
+               {error}
             </div>
          </div>
 
