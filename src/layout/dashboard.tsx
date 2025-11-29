@@ -151,6 +151,11 @@ export default function Dashboard() {
       }
    }, [dataUser])   
 
+   useEffect(() => {
+    getServerStats()
+   }, [serverOn])
+   
+
    return (
       <article className="dashboard">
          <header>
