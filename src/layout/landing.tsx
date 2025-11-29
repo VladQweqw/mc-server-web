@@ -74,10 +74,12 @@ export default function Home() {
          </div>
          <p>{status}</p>
          <div className="access">
-            <p>You need access to manage the server</p>
+            <p>You need to login to manage the server</p>
             {loading ?
                <button className="btn primary-btn">Loading...</button> :
-               <button onClick={() => reqAccess()} className="btn primary-btn">Request Access</button>
+              <a href="/admin">
+                <button className="btn primary-btn">Login</button>
+              </a>
             }
          </div>
       </article>

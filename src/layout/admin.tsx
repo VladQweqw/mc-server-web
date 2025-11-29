@@ -18,12 +18,13 @@ export default function Admin() {
       fd.append('username', form?.current?.username!.value)
       fd.append('password', form?.current?.pwd!.value)
 
-      fetch(`${ENDPOINT}/admin/login`, {
+      fetch(`${ENDPOINT}/users/login`, {
          method: "POST",
          body: fd,
          headers: {
             'Authorization': `Bearer BreaslaAngajatiilor123`
-         }
+         },
+         credentials: "include"
       })
          .then(async (response) => {
             return response.json();
@@ -43,7 +44,7 @@ export default function Admin() {
 
      if(data) {
        if(data?.status === 'success') {
-         navigate('/dashboard')
+         // navigate('/dashboard')
       }
      }
 
@@ -75,7 +76,9 @@ export default function Admin() {
          : ""}
 
          <div className="btns">
-            <button onClick={() => {login()}} className="btn primary-btn">Log in</button>
+            {loading ? 
+            <button className="btn primary-btn">Loading...</button>
+            : <button onClick={() => {login()}} className="btn primary-btn">Log in</button>}
          </div>
       </article>
    )

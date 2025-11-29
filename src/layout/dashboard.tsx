@@ -68,13 +68,13 @@ export default function Dashboard() {
    useEffect(() => {
       console.log(dataUser);
       
-      if(!dataUser) {
-        return navigate("/")
-      }else if(dataUser) {
-         if(!dataUser?.user.isValid) {
-            return navigate("/")
-         }
-      }
+      // if(!dataUser) {
+      //   return navigate("/")
+      // }else if(dataUser) {
+      //    if(!dataUser?.user.isValid) {
+      //       return navigate("/")
+      //    }
+      // }
       
       if (data) {
          setServerOn(data.online)
