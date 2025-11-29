@@ -51,19 +51,7 @@ export default function Dashboard() {
             return response.json();
          })
          .then((json) => {
-            console.log(json);
-            
-            if(json.status === 'success') {
-               if(json.user.isValid !== 1) {
-                   return navigate("/")
-               }
-            }
-            // if(json?.status) {
-            //    if(dataUser?.user?.isValid !== 1) {      
-            //       return navigate("/")
-            //    }
-            // }
-
+            setDataUser(json)
             setLoadingUser(false);
          })
          .catch((err) => {
@@ -139,10 +127,12 @@ export default function Dashboard() {
 
    }, []); // empty dependency = run once on mount
 
+   
    useEffect(() => {   
       if(data && serverOn == null) {
          setServerOn(data.online)
       }
+
       if(stopData || startData) {
          if(stopData?.status === 'success') {            
             setServerOn(false)
@@ -157,7 +147,7 @@ export default function Dashboard() {
     getServerStats()
    }, [serverOn])
    
-
+   
    return (
       <article className="dashboard">
          <header>
