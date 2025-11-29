@@ -144,7 +144,7 @@ export default function Dashboard() {
    useEffect(() => {
       console.log(dataUser);
 
-      if(dataUser.status) {
+      if(dataUser) {
          if(dataUser?.user?.isValid !== 1) {      
             return navigate("/")
          }
