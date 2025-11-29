@@ -123,7 +123,6 @@ export default function Dashboard() {
    useEffect(() => {
       setLoading(true)
       verifyUser()
-      getServerStats()
    }, []); // empty dependency = run once on mount
 
    useEffect(() => {
@@ -132,6 +131,10 @@ export default function Dashboard() {
 
       if(stopData?.status === 'success') {
          setServerOn(false)
+      }
+
+      if(startData?.status === 'success') {
+         setServerOn(true)
       }
 
       if (data) {
@@ -148,6 +151,11 @@ export default function Dashboard() {
          }
       }
    }, [dataUser])
+
+   useEffect(() => {
+      getServerStats()
+   }, [serverOn])
+   
 
    return (
       <article className="dashboard">
