@@ -128,11 +128,7 @@ export default function Dashboard() {
 
    useEffect(() => {   
       if(stopData || startData) {
-              console.log(startData);
-      console.log(stopData);
-         if(stopData?.status === 'success') {
-            console.log("awd");
-            
+         if(stopData?.status === 'success') {            
             setServerOn(false)
          }else if(startData?.status === 'success') {
             setServerOn(true)
@@ -140,13 +136,6 @@ export default function Dashboard() {
       }
 
    }, [startData, stopData])
-
-   useEffect(() => {
-      if (data) {
-         setServerOn(data.online)
-      }
-   }, [data])
-   
 
    useEffect(() => {
       console.log(dataUser);
