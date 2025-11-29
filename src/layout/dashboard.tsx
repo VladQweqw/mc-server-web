@@ -148,6 +148,8 @@ export default function Dashboard() {
          if(dataUser?.user?.isValid !== 1) {      
             return navigate("/")
          }
+      }else {
+         return navigate("/")
       }
    }, [dataUser])   
 
