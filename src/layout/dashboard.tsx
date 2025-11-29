@@ -126,6 +126,12 @@ export default function Dashboard() {
       console.log(dataUser);
       console.log(startData);
       console.log(stopData);
+
+      if(!dataUser?.user?.isValid) {
+         console.log("here");
+         
+         // return navigate("/")
+      }
       
       if(startData?.status === 'success') {
          setServerOn(true)
@@ -133,15 +139,6 @@ export default function Dashboard() {
 
       if(stopData?.status === 'success') {
          setServerOn(false)
-      }
-
-      
-      if(!dataUser) {
-        return navigate("/")
-      }else if(dataUser) {
-         if(!dataUser?.user.isValid) {
-            return navigate("/")
-         }
       }
 
       if (data) {
