@@ -12,7 +12,7 @@ export default function Dashboard() {
    const [errorUser, setErrorUser] = useState('')
    const [loadingUser, setLoadingUser] = useState(false)
 
-   const [serverOn, setServerOn] = useState(false)
+   const [serverOn, setServerOn] = useState<any>(null)
 
    const [errors, setErrors] = useState("")
 
@@ -124,9 +124,13 @@ export default function Dashboard() {
       setLoading(true)
       getServerStats()
       verifyUser()
+
    }, []); // empty dependency = run once on mount
 
    useEffect(() => {   
+      if(data && serverOn == null) {
+         setServerOn(data.online)
+      }
       if(stopData || startData) {
          if(stopData?.status === 'success') {            
             setServerOn(false)
@@ -135,7 +139,7 @@ export default function Dashboard() {
          }
       }
 
-   }, [startData, stopData])
+   }, [startData, stopData, data])
 
    useEffect(() => {
       console.log(dataUser);
@@ -145,12 +149,7 @@ export default function Dashboard() {
             return navigate("/")
          }
       }
-   }, [dataUser])
-
-   useEffect(() => {            
-      getServerStats()
-   }, [serverOn])
-   
+   }, [dataUser])   
 
    return (
       <article className="dashboard">
